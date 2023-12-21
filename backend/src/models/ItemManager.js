@@ -10,13 +10,11 @@ class ItemManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create(item) {
-    // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (title) values (?)`,
-      [item.title]
+      `insert into ${this.table} (title, description) values (?, ?)`,
+      [item.title, item.description]
     );
 
-    // Return the ID of the newly inserted item
     return result.insertId;
   }
 
@@ -44,16 +42,21 @@ class ItemManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  // async update(item) {
-  //   ...
-  // }
+  async update(item) {
+    // Execute the SQL UPDATE query to modify an existing item in the "item" table
+    await this.database.query(
+      `update ${this.table} set title = ?, description = ? where id = ?`,
+      [item.title, item.id, item.description]
+    );
+  }
 
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an item by its ID
 
-  // async delete(id) {
-  //   ...
-  // }
+  async delete(id) {
+    // Execute the SQL DELETE query to remove an item from the "item" table
+    await this.database.query(`delete from ${this.table} where id = ?`, [id]);
+  }
 }
 
 module.exports = ItemManager;

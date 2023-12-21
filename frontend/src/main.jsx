@@ -3,12 +3,19 @@ import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./App";
+import App, { itemsLoader } from "./App";
+import AddItem, { postItem } from "./pages/AddItem";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: itemsLoader,
+  },
+  {
+    path: "/add",
+    element: <AddItem />,
+    action: postItem,
   },
 ]);
 
