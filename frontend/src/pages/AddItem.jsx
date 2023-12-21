@@ -2,13 +2,27 @@ import React from "react";
 import { Form, redirect } from "react-router-dom";
 import "../styles/AddItem.css";
 import Input from "../components/Input";
-// import { useNavigate } from "react-router-dom";
 
 /**
-|--------------------------------------------------
-| post with Form component from react-router-dom
-|--------------------------------------------------
-*/
+ |--------------------------------------------------
+ | post with Form component from react-router-dom
+ |--------------------------------------------------
+ */
+
+/** 
+ 1. import du composant Form de react-router-dom
+
+ 2. La prop 'method' précise le type de mutation: "post" ou "put"
+
+ 3. La prop 'action' indique l'url vers laquelle la requête sera envoyée et déclenche la fonction attachée à la prop 'action' de la route associée (ici "/add") à la sumission du formaulaire.
+
+ 4. Ajout de la prop 'action' à la route "/add" dans le router
+
+ 5. Création de la fonction de post qui sera passée à la prop 'action' de la route associée
+
+ 6. Récupération des données du formulaire à l'aide de l'objet 'request' et de la méthode formData(). 
+ On utilise la méthode 'Object.fromEntries()' pour convertir les entrées du formulaire en objet.
+ */
 
 function AddItem() {
   return (
@@ -48,10 +62,29 @@ export const postItem = async ({ request }) => {
 };
 
 /**
-|--------------------------------------------------
-| post with formData
-|--------------------------------------------------
-*/
+ |--------------------------------------------------
+ | post with formData
+ |--------------------------------------------------
+ */
+
+/** 
+ 1. création d'un formulaire html classique
+
+ 2. La prop 'method' précise le type de mutation: "post" ou "put"
+
+ 3. création de la fonction de post
+
+ 4. Récupération des données du formulaire:
+  - nouvelle instance de la classe FormData à laquelle il faut passer le formulaire
+  (e.target)
+  - si peu d'entrées, on peut utiliser la méthode 'get()' dans laquelle on passe le nom de l'entrée
+  - si beaucoup d'entrées, utiliser Object.fromEntries()
+  On utilise la méthode 'Object.fromEntries()' pour convertir les entrées du formulaire en objet.
+
+ 5. La fonction de post est passée à la prop 'onSubmit' du formulaire et non pas du bouton!
+ */
+
+// import { useNavigate } from "react-router-dom";
 
 // function AddItem() {
 //   const navigate = useNavigate();
@@ -69,8 +102,6 @@ export const postItem = async ({ request }) => {
 //       title: formData.get("title"),
 //       description: formData.get("description"),
 //     };
-
-//     console.log(data);
 
 //     const response = await fetch(`${apiURL}/api/items`, {
 //       method: "POST",
