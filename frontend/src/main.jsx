@@ -5,17 +5,24 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App, { itemsLoader } from "./App";
 import AddItem, { postItem } from "./pages/AddItem";
+import RootLayout from "./Layouts/RootLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    loader: itemsLoader,
-  },
-  {
-    path: "/add",
-    element: <AddItem />,
-    action: postItem,
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+        loader: itemsLoader,
+      },
+      {
+        path: "/add",
+        element: <AddItem />,
+        action: postItem,
+      },
+    ],
   },
 ]);
 

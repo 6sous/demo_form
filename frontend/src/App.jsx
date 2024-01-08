@@ -1,14 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  const navigate = useNavigate();
+  const items = useLoaderData();
 
   return (
     <div className="App">
-      <button type="button" onClick={() => navigate("/add")}>
-        add item
-      </button>
+      {items.map((item) => {
+        return (
+          <div key={item.id}>
+            <h1>{item.title}</h1>
+            <p>{item.description}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
