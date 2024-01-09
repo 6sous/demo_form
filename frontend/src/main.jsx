@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App, { itemsLoader } from "./App";
 import AddItem, { postItem } from "./pages/AddItem";
 import RootLayout from "./Layouts/RootLayout";
+import Login, { authenticate } from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         path: "/add",
         element: <AddItem />,
         action: postItem,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+        action: authenticate,
       },
     ],
   },

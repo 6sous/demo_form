@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, redirect } from "react-router-dom";
-import "../styles/AddItem.css";
+import "../styles/AddItem.scss";
 import Input from "../components/Input";
 
 /**

@@ -1,72 +1,72 @@
-// const tables = require("../tables");
+const tables = require("../tables");
 
-// const browse = async (req, res, next) => {
-//   try {
-//     const users = await tables.user.readAll();
+const browse = async (req, res, next) => {
+  try {
+    const users = await tables.user.readAll();
 
-//     res.json(users);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+};
 
-// const read = async (req, res, next) => {
-//   try {
-//     const user = await tables.user.read(req.params.id);
+const read = async (req, res, next) => {
+  try {
+    const user = await tables.user.read(req.params.id);
 
-//     if (user == null) {
-//       res.sendStatus(404);
-//     } else {
-//       res.json(user);
-//     }
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+    if (user == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
-// const readByEmailAndPassToNext = async (req, res, next) => {
-//   try {
-//     const user = await tables.user.readByEmail(req.body.email);
+const readByEmailAndPassToNext = async (req, res, next) => {
+  try {
+    const user = await tables.user.readByEmail(req.body.email);
 
-//     // console.log(user);
+    // console.log(user);
 
-//     if (user == null) {
-//       res.sendStatus(401);
-//     } else {
-//       req.user = user;
-//       next();
-//     }
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+    if (user == null) {
+      res.sendStatus(401);
+    } else {
+      req.user = user;
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
-// const add = async (req, res, next) => {
-//   const user = req.body;
+const add = async (req, res, next) => {
+  const user = req.body;
 
-//   try {
-//     const insertId = await tables.user.create(user);
+  try {
+    const insertId = await tables.user.create(user);
 
-//     res.status(201).json({ insertId });
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+    res.status(201).json({ insertId });
+  } catch (err) {
+    next(err);
+  }
+};
 
-// const destroy = async (req, res, next) => {
-//   try {
-//     await tables.user.delete(req.params.id);
+const destroy = async (req, res, next) => {
+  try {
+    await tables.user.delete(req.params.id);
 
-//     res.sendStatus(204);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
 
-// module.exports = {
-//   browse,
-//   read,
-//   readByEmailAndPassToNext,
-//   add,
-//   destroy,
-// };
+module.exports = {
+  browse,
+  read,
+  readByEmailAndPassToNext,
+  add,
+  destroy,
+};
