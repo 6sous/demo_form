@@ -62,9 +62,15 @@ const verifyToken = async (req, res, next) => {
       throw new Error("Authorization header is missing");
     }
 
-    const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = payload.sub;
+    const [type, token] = authorization.split(" ");
+    if (type !== "Bearer") {
+      throw new Error("Authorization header has not the 'Bearer' type");
+    }
+
+    req.payload = jwt.verify(token, process.env.JWT_SECRET);
+
+    delete req.payload.sub.hashed_password;
+
     next();
   } catch (error) {
     next(error);

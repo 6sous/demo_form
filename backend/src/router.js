@@ -18,9 +18,9 @@ const {
 } = require("./middlewares/auth");
 
 // items routes
-router.get("/items", itemControllers.browse);
+router.get("/items", verifyToken, itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
-router.post("/items", itemControllers.add);
+router.post("/items", verifyToken, itemControllers.add);
 router.put("/items/:id", itemControllers.edit);
 router.delete("/items/:id", itemControllers.destroy);
 

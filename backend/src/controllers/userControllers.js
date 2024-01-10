@@ -28,8 +28,6 @@ const readByEmailAndPassToNext = async (req, res, next) => {
   try {
     const user = await tables.user.readByEmail(req.body.email);
 
-    // console.log(user);
-
     if (user == null) {
       res.sendStatus(401);
     } else {

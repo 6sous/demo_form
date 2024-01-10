@@ -28,7 +28,13 @@ export default App;
 
 export const itemsLoader = async () => {
   const apiURL = import.meta.env.VITE_BACKEND_URL;
-  const response = await fetch(`${apiURL}/api/items`);
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${apiURL}/api/items`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!response.ok) {
     throw new Error(JSON.stringify({ message: "Could not fetch items." }), {

@@ -41,6 +41,7 @@ export default AddItem;
 
 export const postItem = async ({ request }) => {
   const form = await request.formData();
+  const token = localStorage.getItem("token");
 
   const data = Object.fromEntries(form);
 
@@ -50,7 +51,9 @@ export const postItem = async ({ request }) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
+
     body: JSON.stringify(data),
   });
 
